@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Dashboard</title>
+    <link rel="icon" type="image/png" href="favicons/favicon-32x32.png" />
+    <link rel="stylesheet" href="css/user.css">
+    <style>
+        .formdiv {
+            transform: translateY(100px);
+            height: 400px;
+            width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body id="vantas">
+    <form class="formdiv" style="border:1px solid #ccc">
+        <div class="container">
+            <a href="javascript:history.back()"><img src="icons/arrow-left.svg" class="filter-white"></a>
+            <h1>Welcome User1</h1>
+            <p>{{message}}</p>
+            <hr>
+            <div class="clearfix">
+                <button type="button" class="cancelbtn" onclick="location.href='updatepass'">Change Password</button>
+                <button type="button" class="signupbtn" onclick="location.href='updateemail'">Update email</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

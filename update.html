@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Dashboard</title>
+    <link rel="icon" type="image/png" href="favicons/favicon-32x32.png" />
+    <link rel="stylesheet" href="css/user.css">
+    <style>
+        .formdiv {
+            transform: translateY(100px);
+            height: 470px;
+            width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <form class="formdiv" method="POST" style="border:1px solid #ccc">
+        <div class="container">
+            <h1>Update Profile</h1>
+            <p></p>
+            <hr>
+
+            <label for="old">Previous</label>
+            <input type="{{value}}" placeholder="Enter old" name="old" required>
+            <label for="new">New </label>
+            <input type="{{value}}" placeholder="Enter new " name="new" required>
+            <div class="clearfix">
+                <button type="button" class="cancelbtn" onclick="location.href='dashboard.html'">Cancel</button>
+                <button type="submit" class="signupbtn">Update</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>
