@@ -1,3 +1,3 @@
 ## Major Project
 
-Frontend hosted by flask.
+Frontend hosted using Flask.
