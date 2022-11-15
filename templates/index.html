@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>IoT Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+
+<body>
+    <div class="Account" style="display:none">
+        <div class="AccountInside">
+
+            <table>
+                <tr>
+                    <td style="padding-top: 10px;">
+                        <p>Profile url:</p>
+                    </td>
+                    <td style="padding-left: 5px;">
+                        <input type="text" id="profileUrl" value="">
+                    </td>
+                </tr>
+            </table>
+
+            <img id="ProfilePic"
+                style="height: 150px;width: 150px;border-radius: 500px;margin-bottom: 20px;border: 3px solid white;box-shadow: rgba(0, 0, 0, 0.55) 0px 5px 15px;margin-bottom: 100px;"
+                src="https://1.bp.blogspot.com/-0ZUMPsBahSo/X0vuBttwtWI/AAAAAAAAdwM/_0Nuxi-PWUsgTsLdAmGZqILPiJf7N2bdACLcBGAsYHQ/s640/best%2Bdp%2Bfor%2Bwhatsapp%2B%25281%2529.jpg" alt="">
+
+            <p style="padding-left: 10%;padding-right: 10%;line-height: unset;text-align: center;">Change
+                <b>Profile.png</b> to your Profile pic
+            </p>
+
+            <div style="display: flex;justify-content: center; width: 100%;min-height: 20%;align-items: center;">
+                <button onclick="profileSave()"
+                    style="margin: 10%; padding: 5px 13px;background-color: rgb(163, 255, 163);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Save</button>
+
+                <button onclick="popup('.Account')"
+                    style="padding: 5px 13px;background-color: rgb(255, 132, 110);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;"
+                    class="pointer">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="Stats" style="display: none;">
+        <div class="StatsInside">
+
+            <iframe src="" id="iframe1" width="100%" height="40%"></iframe>
+
+
+            <button onclick="stats()"
+                style="padding: 5px 13px;background-color: rgb(255, 132, 110);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Close</button>
+        </div>
+
+    </div>
+
+    <div class="EditSensor" style="display: none;">
+        <div class="AddSensorInside">
+
+            <form method="POST">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Sensor Id:</p>
+                            </td>
+                            <td style="padding-top: 5px;">
+                                <select id="editSensorSelect">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Sensor Name:</p>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <input type="text" name="sensorName" id="editSensorName" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Location: </p>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <input type="text" name="sensorLocation" id="editSensorLocation" value="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+            <div style="display: flex;justify-content: center; width: 100%;min-height: 20%;align-items: center;">
+                <button onclick="editSensorPopupSave()"
+                    style="margin: 10%; padding: 5px 13px;background-color: rgb(163, 255, 163);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Save</button>
+                &nbsp; &nbsp; &nbsp;
+                <button onclick="popup('.EditSensor')"
+                    style="margin: 10%; padding: 5px 13px;background-color: rgb(255, 132, 110);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="AddSensor" style="display: none;">
+        <div class="AddSensorInside">
+
+            <form method="POST">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Sensor Name:</p>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <input type="text" name="sensorName" id="sensorName" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Location: </p>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <input type="text" name="sensorLocation" id="sensorLocation" value="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top: 10px;">
+                                <p>Pin number: </p>
+                            </td>
+                            <td style="padding-left: 5px;">
+                                <p id="pinnum"></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+
+            <div style="display: flex;justify-content: center; width: 100%;min-height: 20%;align-items: center;">
+                <button onclick="newSensorPopupSave()"
+                    style="margin: 10%; padding: 5px 13px;background-color: rgb(163, 255, 163);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Save</button>
+                &nbsp; &nbsp; &nbsp;
+                <button onclick="newSensorPopup()"
+                    style="margin: 10%; padding: 5px 13px;background-color: rgb(255, 132, 110);border-radius: 5px;box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;cursor: pointer;">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="NotPopup">
+        <h1 class="left">Dashboard</h1>
+        <br>
+        <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/edit.svg"
+            alt="map-pin" class="left svg-white" />
+        <a onclick="popup('.EditSensor')" style="cursor: pointer;">
+            <h2>Edit Sensor Information</h2>
+        </a>
+        <br>
+        <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/user.svg"
+            alt="map-pin" class="left svg-white" />
+        <a onclick="popup('.Account')" style="cursor: pointer;">
+            <h2>View Profile</h2>
+        </a>
+        <ul class="flex-container">
+
+            <li class="flex-item">
+                <h2 id="deviceName1" class="left">Light</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation1">Master Bedroom</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(1)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree1" onchange="checkbox()" name="check" />
+                    <label for="slideThree1"></label>
+                </div>
+            </li>
+
+            <li class="flex-item">
+                <h2 id="deviceName2" class="left">Water Tap</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation2">Kitchen</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(2)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree2" onchange="checkbox()" name="check" />
+                    <label for="slideThree2"></label>
+                </div>
+            </li>
+
+            <li class="flex-item">
+                <h2 id="deviceName3" class="left">Temperature</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation3">Kitchen</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(3)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree3" onchange="checkbox()" name="check" />
+                    <label for="slideThree3"></label>
+                </div>
+            </li>
+
+            <li class="flex-item">
+                <h2 id="deviceName4" class="left">Fire</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation4">Kitchen</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(4)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree4" onchange="checkbox()" name="check" />
+                    <label for="slideThree4"></label>
+                </div>
+            </li>
+
+            <li class="flex-item">
+                <h2 id="deviceName5" class="left">Door</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation5">Garage</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(5)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree5" onchange="checkbox()" name="check" />
+                    <label for="slideThree5"></label>
+                </div>
+            </li>
+
+            <li class="flex-item">
+                <h2 id="deviceName6" class="left">Lights</h2>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg"
+                    alt="map-pin" class="left svg-white" />
+                <p id="deviceLocation6">Living Room</p>
+                <br>
+                <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg"
+                    alt="pie-chart" class="left svg-white" />
+                <p class="pointer" onclick="stats(6)">See Stats</p>
+                <div class="slideThree">
+                    <input type="checkbox" value="None" id="slideThree6" onchange="checkbox()" name="check" />
+                    <label for="slideThree6"></label>
+                </div>
+            </li>
+
+
+            <div class="addItem pointer" onclick="newSensorPopup()">
+                <img src="https://github.com/KrishnaBMU/IOT-Dashboard/blob/main/icons/addItem.png?raw=true"
+                    width="100px" height="100px" alt="Add">
+            </div>
+        </ul>
+
+
+
+        <style>
+            .front {
+                will-change: transform;
+                transition: transform 250ms;
+            }
+
+            .pushable:hover .front {
+                transform: translateY(-6px);
+            }
+
+            .pushable:active .front {
+                transform: translateY(-2px);
+            }
+        </style>
+
+        <button class="pushable open-button" onclick="openForm()">
+            <span class="front">
+                Chat
+            </span>
+        </button>
+
+        <div class="chat-popup" id="myForm">
+            <div class="form-container">
+                <h1>Chat</h1>
+
+                <label for="msg"></label>
+                <input id="ChatbotText" rows="1" placeholder="Type message..." onkeypress="keyPress()"
+                    name="msg"></input>
+                <textarea id="ChatbotTextOutput" style="cursor: text;user-select: none;padding: 10px;"
+                    placeholder="Output..." readonly></textarea>
+
+                <button class="pushable" id="chatSend" style="background-color: #087e49;" onclick="sendForm()">
+                    <span class="front" style="background-color: #04AA6D;">
+                        Send
+                    </span>
+                </button>
+                <button class="pushable" onclick="closeForm()">
+                    <span class="front">
+                        close
+                    </span>
+                </button>
+            </div>
+        </div>
+
+</body>
+<script src="static/javascript/dashboard.js"></script>
+
+</html>
