@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Dashboard</title>
+    <link rel="icon" type="image/png" href="favicons/favicon-32x32.png" />
+    <link rel="stylesheet" href="static/css/loginsignup.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="items">
+              <h1 class="tag">Sign Up</h1>
+              <form class="form">
+                <div class="username">
+                  <input id="user" type="text" placeholder="Username" required>
+                </div>
+                <div class="email">
+                  <input id="email" type="email" placeholder="E-Mail" required>
+                </div>
+                <div class="password">
+                  <input id="pass" type="password" placeholder="Enter Password" required>
+                </div>
+                <div class="password">
+                  <input id="cpass" type="password" placeholder="Re-type Password" required>
+                </div>
+                <button class="button" type="button" onclick="sendData(); window.location.href='/index';">Sign Up</button>
+                <div class="nav">
+                    <a href="/login">Have already an account? <span>Log In</span></a>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+
+      <script>
+        sendData = function () {
+          var user =  document.getElementById("user").value;
+          var email =  document.getElementById("email").value;
+          var pass =  document.getElementById("pass").value;
+          var cpass =  document.getElementById("cpass").value;
+          var data = {
+            "user": user,
+            "email": email,
+            "pass": pass,
+            "cpass": cpass
+          }
+          fetch(`${window.origin}/signup/data`,{
+              method: 'POST',
+              body: JSON.stringify(data),
+              headers: new Headers({
+                "content-type": "application/json"
+              })
+            })
+        }
+      </script>
+
+</body>
+
+</html>
