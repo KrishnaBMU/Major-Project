@@ -17,12 +17,12 @@
             <h1 class="tag">Log In</h1>
             <form class="form">
               <div class="username">
-                <input class="username" type="text" placeholder="Username" required>
+                <input id="user" type="text" placeholder="Username" required>
               </div>
               <div class="password">
-                <input type="password" placeholder="Enter Password" required>
+                <input id="pass" type="password" placeholder="Enter Password" required>
               </div>
-              <button class="button" type="button">Log In</button>
+              <button class="button" type="button" onclick="sendData()">Log In</button>
               <div class="nav">
                 <a href="/register">Don't have an account? <span>Sign Up</span></a>
               </div>
@@ -30,6 +30,25 @@
           </div>
         </div>
     </div>
+
+    <script>
+      sendData = function () {
+        var user =  document.getElementById("user").value;
+        var pass =  document.getElementById("pass").value;
+        var data = {
+          "user": user,
+          "pass": pass
+        }
+        fetch(`${window.origin}/login/data`,{
+						method: 'POST',
+						body: JSON.stringify(data),
+						headers: new Headers({
+							"content-type": "application/json"
+						})
+					})
+      }
+    </script>
+
 </body>
 
 </html>

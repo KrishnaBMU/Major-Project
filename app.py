@@ -6,7 +6,7 @@ app = Flask(__name__)
 def login():
     return render_template("login.html")
 
-@app.route("/login/data", method=['POST'])
+@app.route("/login/data", methods=['POST'])
 def login_data():
     r = req.get_json()
     username = r['user']
@@ -15,7 +15,6 @@ def login_data():
     print("Password: {}".format(password))
     return r
 
-    
 @app.route("/register", methods = ["GET", "POST"])
 def register():
     if req.method == "POST":
