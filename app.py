@@ -2,19 +2,19 @@ from flask import Flask, request as req, jsonify, render_template, redirect
 
 app = Flask(__name__)
 
-@app.route("/login", methods = ["GET", "POST"])
+@app.route("/login")
 def login():
-    if req.method == "POST":
-        username = req.form.get("username")
-        password = req.form.get("password")
-        ## add auth code here
-        if username == password:
-            print("login sucess")
-            render_template("index.html")
-        return render_template("login.html")
-    else:
-        return render_template("login.html")
-    
+    return render_template("login.html")
+
+@app.route("/login/data", method=['POST'])
+def login_data():
+    r = req.get_json()
+    username = r['user']
+    password = r['pass']
+    print("Username: {}".format(username))
+    print("Password: {}".format(password))
+    return r
+
     
 @app.route("/register", methods = ["GET", "POST"])
 def register():
