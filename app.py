@@ -10,6 +10,7 @@ def login():
         ## add auth code here
         if username == password:
             print("login sucess")
+            render_template("index.html")
         return render_template("login.html")
     else:
         return render_template("login.html")
@@ -24,9 +25,9 @@ def register():
         ## add auth code here
         if username == password:
             print("register sucess")
-        return render_template("register.html")
+        return render_template("signup.html")
     else:
-        return render_template("register.html")
+        return render_template("signup.html")
 
 @app.route("/", methods = ["GET"])
 def home():
@@ -39,4 +40,4 @@ def home():
         return redirect("/login")
     
 if __name__ == "__main__":
-    app.run(port=5000,debug=True)
+    app.run(port=5000, debug=True)
