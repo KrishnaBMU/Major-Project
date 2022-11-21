@@ -418,7 +418,7 @@ button:hover {
 
 /* Button Style */
 .pushable {
-    background: hsl(340deg 100% 32%);
+    background: rgba(163, 0, 54, 0);
     border: none;
     border-radius: 12px;
     padding: 0;
