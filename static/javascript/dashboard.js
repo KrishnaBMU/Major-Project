@@ -1,4 +1,4 @@
-let number = 1;
+let number = 0;
 let backendURL = "http://localhost:5000"
 
 function popup(parm) {
@@ -45,7 +45,7 @@ function newSensorPopup() {
         sensor.style.display = "flex"
         notPopup.style.filter = "blur(7px)";
         if (number < 8) {
-            document.getElementById("pinnum").innerHTML = 'D' + (number);
+            document.getElementById("pinnum").innerHTML = 'D' + (number + 1);
         }
         else {
             document.getElementById("pinnum").innerHTML = "No more pins available";
@@ -59,8 +59,59 @@ function newSensorPopup() {
 }
 
 function newSensorPopupSave() {
-    addSensorToScreen(document.getElementById("sensorName").value, document.getElementById("sensorLocation").value, number + 1);
-    number = number + 1;
+
+    function reqListener() {
+        if (this.status == 200) {
+            addSensorToScreen(document.getElementById("sensorName").value, document.getElementById("sensorLocation").value, number + 1);
+            number = number + 1;
+        }
+        newSensorPopup()
+    }
+
+    data = {
+        "sensor_name": document.getElementById("sensorName").value,
+        "location": document.getElementById("sensorLocation").value,
+        "pin": number + 1,
+        "status": false
+    }
+
+    console.log(data)
+
+    const req = new XMLHttpRequest();
+    req.addEventListener("load", reqListener);
+    req.open("POST", backendURL + "/addsensors");
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    req.send(JSON.stringify(data));
+}
+
+function editSensorPopupSave() {
+    let editSensorSelect = document.getElementById("editSensorSelect");
+    let editSensorName = document.getElementById("editSensorName");
+    let editSensorLocation = document.getElementById("editSensorLocation");
+
+    function reqListener() {
+        if (this.status == 200) {
+            let sensorName = document.getElementById("deviceName" + editSensorSelect.value);
+            let sensorLocation = document.getElementById("deviceLocation" + editSensorSelect.value)
+
+            sensorName.innerHTML = editSensorName.value;
+            sensorLocation.innerHTML = editSensorLocation.value;
+        }
+        popup('.EditSensor');
+    }
+
+    data = {
+        "sensor_name": editSensorName.value,
+        "location": editSensorLocation.value,
+    }
+
+    console.log(data)
+
+    const req = new XMLHttpRequest();
+    req.addEventListener("load", reqListener);
+    req.open("POST", backendURL + "/editsensors/" + editSensorSelect.value);
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    req.send(JSON.stringify(data));
 }
 
 function addSensorToScreen(sensorname, location, pin, currPinStatus) {
@@ -87,28 +138,32 @@ function addSensorToScreen(sensorname, location, pin, currPinStatus) {
 
     var sensors = document.querySelector("ul");
     sensors.removeChild(document.querySelector(".addItem"));
-    console.log(sensors.innerHTML)
     sensors.innerHTML += sensorStart + sensorname + sensorMiddle + location + sensorEnd + "\n\n\n" + addSensorText;
-
-    if (currPinStatus) {
-        document.getElementById("slideThree" + pin).checked = true;
-    }
 
     let newSelect = document.createElement("option");
     newSelect.value = pin
     newSelect.innerHTML = pin
     document.getElementById("editSensorSelect").append(newSelect)
+
 }
 
-
-function reqListener() {
-    var r = JSON.parse(this.responseText);
-    r.sensors.forEach(element => {
-        addSensorToScreen(element.sensor_name, element.location, element.pin, element.status);
-    });
-}
 
 function loadSensorItemsFromBackend() {
+
+    function reqListener() {
+        var r = JSON.parse(this.responseText);
+        r.sensors.forEach(element => {
+            addSensorToScreen(element.sensor_name, element.location, element.pin, element.status);
+            number += 1
+        });
+        
+        r.sensors.forEach(element => {
+            if (element.status) {
+                document.getElementById("slideThree" + element.pin).checked = true;
+            }
+        });
+    }
+
     const req = new XMLHttpRequest();
     req.addEventListener("load", reqListener);
     req.open("GET", backendURL + "/getsensors");
@@ -234,17 +289,4 @@ function countOff() {
         }
     }
     return count;
-}
-
-function editSensorPopupSave() {
-    let editSensorSelect = document.getElementById("editSensorSelect");
-    let editSensorName = document.getElementById("editSensorName");
-    let editSensorLocation = document.getElementById("editSensorLocation");
-
-    let sensorName = document.getElementById("deviceName" + editSensorSelect.value);
-    let sensorLocation = document.getElementById("deviceLocation" + editSensorSelect.value)
-
-    sensorName.innerHTML = editSensorName.value;
-    sensorLocation.innerHTML = editSensorLocation.value;
-    popup('.EditSensor');
 }
