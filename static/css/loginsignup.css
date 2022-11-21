@@ -140,7 +140,7 @@ body {
 .container .card .items .form .password .forgot a:hover, .container .card .items .form .password .forgot a:active {
   color: #858585;
 }
-.container .card .items .form button[type=button] {
+.container .card .items .form input[type=submit] {
   position: relative;
   margin: 30px 0 75px;
   width: 60%;
@@ -156,7 +156,7 @@ body {
   cursor: pointer;
   z-index: 1;
 }
-.container .card .items .form button[type=button]:hover:before {
+.container .card .items .form input[type=submit]:hover:before {
   box-shadow: 0 5px 15px rgba(40, 160, 215, .4);
   opacity: 1;
 }

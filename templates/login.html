@@ -15,14 +15,14 @@
       <div class="card">
           <div class="items">
             <h1 class="tag">Log In</h1>
-            <form class="form">
-              <div class="username">
-                <input id="user" type="text" placeholder="Username" required>
+            <form class="form" action="/login" method="post">
+              <div class="email">
+                <input id="user" type="email" name="email" placeholder="Email" value="aaa@aaa.com" required>
               </div>
               <div class="password">
-                <input id="pass" type="password" placeholder="Enter Password" required>
+                <input id="pass" type="password" name="password" placeholder="Enter Password" value="aaa@aaa.com" required>
               </div>
-              <button class="button" type="button" onclick="sendData(); window.location.href='/index';">Log In</button>
+              <input class="button" type="submit" value="Log In"/>
               <div class="nav">
                 <a href="/signup">Don't have an account? <span>Sign Up</span></a>
               </div>
@@ -30,25 +30,6 @@
           </div>
         </div>
     </div>
-
-    <script>
-      sendData = function () {
-        var user =  document.getElementById("user").value;
-        var pass =  document.getElementById("pass").value;
-        var data = {
-          "user": user,
-          "pass": pass
-        }
-        fetch(`${window.origin}/login/data`,{
-						method: 'POST',
-						body: JSON.stringify(data),
-						headers: new Headers({
-							"content-type": "application/json"
-						})
-					})
-      }
-    </script>
-
 </body>
 
 </html>
