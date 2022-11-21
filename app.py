@@ -1,4 +1,3 @@
-from django.http import response
 from flask import Flask, request as req, jsonify, render_template, redirect, make_response
 import requests
 

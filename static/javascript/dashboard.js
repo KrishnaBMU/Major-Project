@@ -1,7 +1,7 @@
-let number = 6;
+let number = 1;
+let backendURL = "http://localhost:5000"
 
-
-function popup(parm){
+function popup(parm) {
     let account = document.querySelector(parm);
     let notPopup = document.querySelector(".NotPopup")
     if (account.style.display == "none") {
@@ -14,7 +14,7 @@ function popup(parm){
     }
 }
 
-function profileSave(){
+function profileSave() {
     document.getElementById("ProfilePic").src = document.getElementById("profileUrl").value;
     document.getElementById("profileUrl").value = "";
     popup('.Account');
@@ -59,27 +59,25 @@ function newSensorPopup() {
 }
 
 function newSensorPopupSave() {
-    let sensorName = document.getElementById("sensorName");
-    let sensorLocation = document.getElementById("sensorLocation");
-    newSensor();
+    addSensorToScreen(document.getElementById("sensorName").value, document.getElementById("sensorLocation").value, number + 1);
     number = number + 1;
 }
 
-function newSensor() {
-    var code = document.getElementsByTagName("ul");
+function addSensorToScreen(sensorname, location, pin, currPinStatus) {
+
     var sensorStart = `<li class="flex-item">
-<h2 id="deviceName` + (number + 1) + `"class="left">`
+<h2 id="deviceName` + (pin) + `"class="left">`
     var sensorMiddle = `</h2>
 <br>
 <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/map-pin.svg" alt="map-pin" class="left svg-white" />
-<p id="deviceLocation` + (number + 1) + `">`
+<p id="deviceLocation` + (pin) + `">`
     var sensorEnd = `</p>
 <br>
 <img src="https://raw.githubusercontent.com/KrishnaBMU/IOT-Dashboard/fc2a4b3d087394b534a8ddc8ce897679f96a9321/icons/pie-chart.svg" alt="pie-chart" class="left svg-white" />
-<p class="pointer" onclick="stats(`+ number + `)">See Stats</p>
+<p class="pointer" onclick="stats(`+ pin + `)">See Stats</p>
 <div class="slideThree">
-<input type="checkbox" value="None" id="slideThree` + number + `" onchange="checkbox()" name="check" />
-<label for="slideThree` + number + `"></label>
+<input type="checkbox" value="None" id="slideThree` + pin + `" onchange="checkbox(` + pin + `)" name="check" />
+<label for="slideThree` + pin + `"></label>
 </div>
 </li>`
 
@@ -90,15 +88,35 @@ function newSensor() {
     var sensors = document.querySelector("ul");
     sensors.removeChild(document.querySelector(".addItem"));
     console.log(sensors.innerHTML)
-    sensors.innerHTML += sensorStart + document.getElementById("sensorName").value + sensorMiddle + document.getElementById("sensorLocation").value + sensorEnd + "\n\n\n" + addSensorText;
+    sensors.innerHTML += sensorStart + sensorname + sensorMiddle + location + sensorEnd + "\n\n\n" + addSensorText;
+
+    if (currPinStatus) {
+        document.getElementById("slideThree" + pin).checked = true;
+    }
 
     let newSelect = document.createElement("option");
-    newSelect.value = number + 1
-    newSelect.innerHTML = number + 1
+    newSelect.value = pin
+    newSelect.innerHTML = pin
     document.getElementById("editSensorSelect").append(newSelect)
-
-    newSensorPopup();
 }
+
+
+function reqListener() {
+    var r = JSON.parse(this.responseText);
+    r.sensors.forEach(element => {
+        addSensorToScreen(element.sensor_name, element.location, element.pin, element.status);
+    });
+}
+
+function loadSensorItemsFromBackend() {
+    const req = new XMLHttpRequest();
+    req.addEventListener("load", reqListener);
+    req.open("GET", backendURL + "/getsensors");
+    req.send();
+}
+
+loadSensorItemsFromBackend()
+
 
 function send(link) {
     var xhttp = new XMLHttpRequest();
@@ -107,59 +125,15 @@ function send(link) {
     xhttp.send();
 }
 
-var option1 = document.getElementById("slideThree1");
-var option2 = document.getElementById("slideThree2");
-var option3 = document.getElementById("slideThree3");
-var option4 = document.getElementById("slideThree4");
-var option5 = document.getElementById("slideThree5");
-var option6 = document.getElementById("slideThree6");
-// var option7 = document.getElementById("slideThree7");
-let a = "0";
-let b = "0";
-let c = "0";
-let d = "0";
-let e = "0";
-let f = "0";
-// let g = "0";
-function checkbox() {
-
-    if (option1.checked) {
-        a = "1";
+function checkbox(pin) {
+    option = document.getElementById("slideThree" + pin);
+    if (option.checked) {
+        pinStatus = "1";
     }
-    else if (!option1.checked) {
-        a = "0";
+    else {
+        pinStatus = "0";
     }
-    if (option2.checked) {
-        b = "1";
-    }
-    else if (!option2.checked) {
-        b = "0";
-    }
-    if (option3.checked) {
-        c = "1";
-    }
-    else if (!option3.checked) {
-        c = "0";
-    }
-    if (option4.checked) {
-        d = "1";
-    }
-    else if (!option4.checked) {
-        d = "0";
-    }
-    if (option5.checked) {
-        e = "1";
-    }
-    else if (!option5.checked) {
-        e = "0";
-    }
-    if (option6.checked) {
-        f = "1";
-    }
-    else if (!option6.checked) {
-        f = "0";
-    }
-    let link = "https://api.thingspeak.com/update?api_key=Z23ESCW35RJN0OFD&field1=" + a + "&field2=" + b + "&field3=" + c + "&field4=" + d + "&field5=" + e + "&field6=" + f;
+    let link = "https://api.thingspeak.com/update?api_key=Z23ESCW35RJN0OFD&field" + pin + "=" + pinStatus;
     send(link);
 }
 
