@@ -156,7 +156,7 @@ function loadSensorItemsFromBackend() {
             addSensorToScreen(element.sensor_name, element.location, element.pin, element.status);
             number += 1
         });
-        
+
         r.sensors.forEach(element => {
             if (element.status) {
                 document.getElementById("slideThree" + element.pin).checked = true;
@@ -188,8 +188,26 @@ function checkbox(pin) {
     else {
         pinStatus = "0";
     }
-    let link = "https://api.thingspeak.com/update?api_key=Z23ESCW35RJN0OFD&field" + pin + "=" + pinStatus;
-    send(link);
+    
+    function reqListener() {
+        if (this.status == 200) {
+
+            let link = "https://api.thingspeak.com/update?api_key=Z23ESCW35RJN0OFD&field" + pin + "=" + pinStatus;
+            send(link);
+        }
+    }
+
+    data = {
+        "pin": pin,
+        "status": option.checked,
+    }
+
+    const req = new XMLHttpRequest();
+    req.addEventListener("load", reqListener);
+    req.open("POST", backendURL + "/updatesensorstatus");
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    req.send(JSON.stringify(data));
+
 }
 
 
