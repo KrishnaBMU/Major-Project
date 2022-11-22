@@ -6,14 +6,11 @@
     <title>IoT Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="static/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
     <link rel="stylesheet" href="static/css/chat.css">
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="stylesheet" href="static/css/typing.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
+x`
 <body>
     <div class="Account" style="display:none">
         <div class="AccountInside">
@@ -195,83 +192,31 @@
             </div>
         </ul>
 
-
-
-        <!-- <style>
-            .front {
-                will-change: transform;
-                transition: transform 250ms;
-            }
-
-            .pushable:hover .front {
-                transform: translateY(-6px);
-            }
-
-            .pushable:active .front {
-                transform: translateY(-2px);
-            }
-        </style>
-
-        <button class="pushable open-button" onclick="openForm()">
-            <span class="front">
-                Chat
-            </span>
-        </button>
-
-        <div class="chat-popup" id="myForm">
-            <div class="form-container">
-                <h1>Chat</h1>
-
-                <label for="msg"></label>
-                <input id="ChatbotText" rows="1" placeholder="Type message..." onkeypress="keyPress()"
-                    name="msg"></input>
-                <textarea id="ChatbotTextOutput" style="cursor: text;user-select: none;padding: 10px;"
-                    placeholder="Output..." readonly></textarea>
-
-                <button class="pushable" id="chatSend" style="background-color: #087e49;" onclick="sendForm()">
-                    <span class="front" style="background-color: #04AA6D;">
-                        Send
-                    </span>
-                </button>
-                <button class="pushable" onclick="closeForm()">
-                    <span class="front">
-                        close
-                    </span>
-                </button>
-            </div>
-        </div> -->
-
-        <div class="container">
-            <div class="chatbox">
-                <div class="chatbox__support">
-                    <div class="chatbox__header">
-                        <div class="chatbox__image--header">
+        <div class="cont">
+            <div class="chat">
+                <div class="chatdiv">
+                    <div class="chathead">
+                        <div class="chatimage">
                             <img src="../static/image.png" alt="image">
                         </div>
-                        <div class="chatbox__content--header">
-                            <h4 class="chatbox__heading--header">Dashboard Chat Assistant</h4>
+                        <div>
+                            <h4 class="heading">Dashboard Chat Assistant</h4>
                         </div>
                     </div>
-                    <div class="chatbox__messages">
-
-                        
+                    <div class="chatmsg">  
                         <textarea id="ChatbotTextOutput" style="cursor: text;user-select: none;padding: 10px; width: 100%; height: 100%;"
-                            placeholder="Output..." readonly></textarea>
-                        
+                            placeholder="Type help to know the commands" readonly></textarea>
                     </div>
-                    <div class="chatbox__footer">
-                        <!-- <input type="text" placeholder="Write a message..."> -->
+                    <div class="chatfoot">
                         <input id="ChatbotText" rows="1" placeholder="Type message..." onkeypress="keyPress()"
                             name="msg"></input>
-                        <!-- <p class="chatbox__send--footer">Send</p> -->
                         <button class="pushable" id="chatSend" style="background-color: none;" onclick="sendForm()">
                             <span class="material-icons" style="color: white;">send</span>
                         </button>
                         
-      <!-- <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button> -->
                     </div>
                 </div>
-                <div class="chatbox__button">
+                <div class="chatbtn">
                     <button>button</button>
                 </div>
             </div>
