@@ -1,5 +1,6 @@
 let number = 0;
 let backendURL = "http://localhost:5000"
+let sensorControl = "http://localhost:6000"
 
 function popup(parm) {
     let account = document.querySelector(parm);
@@ -188,11 +189,19 @@ function checkbox(pin) {
     else {
         pinStatus = "0";
     }
-    
+
     function reqListener() {
         if (this.status == 200) {
-
             let link = "https://api.thingspeak.com/update?api_key=Z23ESCW35RJN0OFD&field" + pin + "=" + pinStatus;
+            send(link);
+
+            link = sensorControl + "?"
+
+            var r = JSON.parse(this.responseText);
+            r.sensors.forEach(element => {
+                link += "field" + element.pin + "=" + element.status + "&"
+            });
+
             send(link);
         }
     }
