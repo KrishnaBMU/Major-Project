@@ -8,7 +8,7 @@ backend_url = "http://localhost:5000"
 @app.route("/login", methods=["GET","POST"])
 def login():
     if req.method == "GET":
-        return render_template("index2.html")
+        return render_template("login.html")
     else:
         r = dict(req.form)
         email = r['email']
@@ -24,7 +24,7 @@ def login():
         res.set_cookie("auth", email)
         
         if r.status_code == 400:
-            return render_template("index2.html")
+            return render_template("login.html")
         else:
             return res
 
