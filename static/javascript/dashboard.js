@@ -282,7 +282,7 @@ function countOn() {
 
 function countOff() {
     let count = 0;
-    for (i = 1; i < number; i++) {
+    for (i = 1; i < number + 1; i++) {
         temp = document.getElementById("slideThree" + i);
         if (!temp.checked) {
             count = count + 1
