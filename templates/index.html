@@ -6,11 +6,12 @@
     <title>IoT Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
     <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/4.0.2/bootstrap-material-design.css">
     <link rel="stylesheet" href="static/css/chat.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-x`
+
 <body>
     <div class="Account" style="display:none">
         <div class="AccountInside">
@@ -191,36 +192,38 @@ x`
                     width="100px" height="100px" alt="Add">
             </div>
         </ul>
+    </div>
 
-        <div class="cont">
-            <div class="chat">
-                <div class="chatdiv">
-                    <div class="chathead">
-                        <div class="chatimage">
-                            <img src="../static/image.png" alt="image">
-                        </div>
-                        <div>
-                            <h4 class="heading">Dashboard Chat Assistant</h4>
-                        </div>
+    <div class="cont">
+        <div class="chat">
+            <div class="chatdiv">
+                <div class="chathead">
+                    <div class="chatimage">
+                        <img src="../static/image.png" alt="image">
                     </div>
-                    <div class="chatmsg">  
-                        <textarea id="ChatbotTextOutput" style="cursor: text;user-select: none;padding: 10px; width: 100%; height: 100%;"
-                            placeholder="Type help to know the commands" readonly></textarea>
-                    </div>
-                    <div class="chatfoot">
-                        <input id="ChatbotText" rows="1" placeholder="Type message..." onkeypress="keyPress()"
-                            name="msg"></input>
-                        <button class="pushable" id="chatSend" style="background-color: none;" onclick="sendForm()">
-                            <span class="material-icons" style="color: white;">send</span>
-                        </button>
-                        
+                    <div>
+                        <h4 class="heading">Dashboard Chat Assistant</h4>
                     </div>
                 </div>
-                <div class="chatbtn">
-                    <button>button</button>
+                <div class="chatmsg">
+                    <textarea id="ChatbotTextOutput"
+                        style="cursor: text;user-select: none;padding: 10px; width: 100%; height: 100%;"
+                        placeholder="Type help to know the commands" readonly></textarea>
+                </div>
+                <div class="chatfoot">
+                    <input id="ChatbotText" rows="1" placeholder="Type message..." onkeypress="keyPress()"
+                        name="msg"></input>
+                    <button class="pushable" id="chatSend" style="background-color: none;" onclick="sendForm()">
+                        <span class="material-icons" style="color: white;">send</span>
+                    </button>
+
                 </div>
             </div>
+            <div class="chatbtn">
+                <button>button</button>
+            </div>
         </div>
+    </div>
 
 </body>
 <script src="static/javascript/dashboard.js"></script>
