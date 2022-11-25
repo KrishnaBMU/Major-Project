@@ -67,7 +67,7 @@ def home():
     ## check cookie
     if req.cookies.get("auth") != None:
         print("user has cookies")
-        return render_template("index.html")
+        return render_template("index2.html")
     else:
         print("user has no cookies")
         return redirect("/login")

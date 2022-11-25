@@ -4,14 +4,14 @@ let sensorControl = "http://localhost:6000"
 
 function popup(parm) {
     let account = document.querySelector(parm);
-    let notPopup = document.querySelector(".NotPopup")
+    // let notPopup = document.querySelector(".NotPopup")
     if (account.style.display == "none") {
         account.style.display = "flex"
-        notPopup.style.filter = "blur(7px)";
+        // notPopup.style.filter = "blur(7px)";
     }
     else {
         account.style.display = "none"
-        notPopup.style.filter = ""
+        // notPopup.style.filter = ""
     }
 }
 
@@ -26,25 +26,25 @@ function stats(SendorId) {
     let link = "https://thingspeak.com/channels/1526741/charts/" + SendorId + "?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"
 
     let stats = document.querySelector(".Stats");
-    let notPopup = document.querySelector(".NotPopup")
+    // let notPopup = document.querySelector(".NotPopup")
     if (stats.style.display == "none") {
         stats.style.display = "flex"
-        notPopup.style.filter = "blur(7px)";
+        // notPopup.style.filter = "blur(7px)";
         let graph = document.getElementById("iframe1");
         graph['src'] = link;
     }
     else {
         stats.style.display = "none"
-        notPopup.style.filter = ""
+        // notPopup.style.filter = ""
     }
 }
 
 function newSensorPopup() {
     let sensor = document.querySelector(".AddSensor");
-    let notPopup = document.querySelector(".NotPopup")
+    // let notPopup = document.querySelector(".NotPopup")
     if (sensor.style.display == "none") {
         sensor.style.display = "flex"
-        notPopup.style.filter = "blur(7px)";
+        // notPopup.style.filter = "blur(7px)";
         if (number < 8) {
             document.getElementById("pinnum").innerHTML = 'D' + (number + 1);
         }
@@ -55,7 +55,7 @@ function newSensorPopup() {
     }
     else {
         sensor.style.display = "none"
-        notPopup.style.filter = ""
+        // notPopup.style.filter = ""
     }
 }
 
@@ -138,8 +138,8 @@ function addSensorToScreen(sensorname, location, pin, currPinStatus) {
 </div>`
 
     var sensors = document.querySelector("ul");
-    sensors.removeChild(document.querySelector(".addItem"));
-    sensors.innerHTML += sensorStart + sensorname + sensorMiddle + location + sensorEnd + "\n\n\n" + addSensorText;
+    // sensors.removeChild(document.querySelector(".addItem"));
+    sensors.innerHTML += sensorStart + sensorname + sensorMiddle + location + sensorEnd;
 
     let newSelect = document.createElement("option");
     newSelect.value = pin
