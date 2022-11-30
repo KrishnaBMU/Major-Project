@@ -1,6 +1,6 @@
 let number = 0;
 let backendURL = "http://127.0.0.1:5000"
-let sensorControl = "http://localhost:6000"
+let sensorControl = "http://127.0.0.1:2000"
 
 function popup(parm) {
     let account = document.querySelector(parm);
