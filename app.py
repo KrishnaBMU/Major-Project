@@ -25,9 +25,10 @@ def login():
         
         print(r.json())
         
-        email = cipher_suite.encrypt(email.encode()).decode()
+        email_c = cipher_suite.encrypt(email.encode()).decode()
         res = make_response(redirect("/"))
-        res.set_cookie("auth", email)
+        res.set_cookie("auth", email_c)
+        res.set_cookie("name", email)
         
         if r.status_code == 400:
             return render_template("login.html")
@@ -52,9 +53,10 @@ def signup():
         r = requests.post(backend_url + "/signup",json = {"email": email, "password": password})
         
         print(r.json())
-        
+        email_c = cipher_suite.encrypt(email.encode()).decode()
         res = make_response(redirect("/"))
-        res.set_cookie("auth", email)
+        res.set_cookie("auth", email_c)
+        res.set_cookie("name", email)
         
         if r.status_code == 400:
             return render_template("signup.html")

@@ -317,3 +317,6 @@ function countOff() {
     }
     return count;
 }
+
+var match = document.cookie.match(new RegExp('(^| )' + "name" + '=([^;]+)'));
+  if (match) document.getElementById("username").innerHTML = match[2];
