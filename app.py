@@ -1,9 +1,14 @@
 from flask import Flask, request as req, jsonify, render_template, redirect, make_response
 import requests
+from cryptography.fernet import Fernet
+from flask_cors import CORS
 
 app = Flask(__name__)
+key = b'NenVg62wVWiBGvsT6NjExht5iNEYnzMUHiQH8-4e0vw='
+cipher_suite = Fernet(key)
 
-backend_url = "http://localhost:5000"
+backend_url = "http://127.0.0.1:5000"
+CORS(app)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -20,6 +25,7 @@ def login():
         
         print(r.json())
         
+        email = cipher_suite.encrypt(email.encode()).decode()
         res = make_response(redirect("/"))
         res.set_cookie("auth", email)
         

@@ -1,5 +1,5 @@
 let number = 0;
-let backendURL = "http://localhost:5000"
+let backendURL = "http://127.0.0.1:5000"
 let sensorControl = "http://localhost:6000"
 
 function popup(parm) {
@@ -298,7 +298,7 @@ Here are my commands -
 
 function countOn() {
     let count = 0;
-    for (i = 1; i < number; i++) {
+    for (i = 1; i < number + 1; i++) {
         temp = document.getElementById("slideThree" + i);
         if (temp.checked) {
             count = count + 1

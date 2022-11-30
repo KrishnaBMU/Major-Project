@@ -17,13 +17,13 @@
         <h1 class="tag">Sign Up</h1>
         <form class="form" action="/signup"  method="post">
           <div class="email">
-            <input id="email" name="email" value="aaa@aaa.com" type="email" placeholder="E-Mail" required>
+            <input id="email" name="email" type="email" placeholder="E-Mail" required>
           </div>
           <div class="password">
-            <input id="pass" name="password" value="aaa" type="password" placeholder="Enter Password" required>
+            <input id="pass" minlength="8" name="password" type="password" placeholder="Enter Password" required>
           </div>
           <div class="password">
-            <input id="cpass" name="cpassword" value="aaa" type="password" placeholder="Re-type Password" required>
+            <input id="cpass" minlength="8" name="cpassword" type="password" placeholder="Re-type Password" required>
           </div>
           <input class="button" type="submit" value="Sign up"/>
           <div class="nav">
