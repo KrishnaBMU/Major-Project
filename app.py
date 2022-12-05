@@ -31,7 +31,7 @@ def login():
         res.set_cookie("name", email)
         
         if r.status_code == 400:
-            return render_template("login.html")
+            return render_template("login.html", error="Invalid Credentials")
         else:
             return res
 
@@ -45,6 +45,9 @@ def signup():
         email = r['email']
         password = r['password']
         cpassword = r['cpassword']
+        
+        if "@" not in password:
+            return render_template("signup.html",error="Add special character in password")
         
         print("Email: {}".format(email))
         print("Password: {}".format(password))
